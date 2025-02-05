@@ -1,6 +1,5 @@
 import { View, Text, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { Colors } from '../../constants/Colors'
 import { collection, getDocs, query } from 'firebase/firestore'
 import { db } from '../../Configs/FirebaseConfig'
 import CategoryItems from './CategoryItems'
@@ -46,7 +45,6 @@ export default function Category({explore=false,onCategorySelect}) {
                 fontSize:20,
                 fontFamily:"outfit-bold"
             }} >Category</Text>
-            <Text style={{color:Colors.PRIMARY,fontFamily:"outfit-medium"}}>View all</Text>
         </View>}
 
         <FlatList 

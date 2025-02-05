@@ -17,14 +17,14 @@ export default function PopularBusinessList({business}) {
     }}>
       <Image source={{uri:business?.imageUrl}} 
       style={{
-        width:"full",
-        height:130,
+        width:"full-width",
+        height:200,
         borderRadius:15
       }}
       />
       <View style={{
         marginTop:7,
-        gap:5
+        gap:10
       }}>
         <Text style={{
             fontFamily:"outfit-bold",
@@ -48,8 +48,8 @@ export default function PopularBusinessList({business}) {
                 }}>
                     <Image source={require("../../assets/images/star.png")}
                     style={{
-                        width:15,
-                        height:15,
+                        width:17,
+                        height:17,
                     }}/>
                     <Text style={{fontFamily:"outfit"}}>4.5</Text>
                 </View>
