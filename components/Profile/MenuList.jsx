@@ -1,25 +1,14 @@
-import { View, Text, FlatList, Image, TouchableOpacity, Share } from 'react-native'
+import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import {Colors} from "./../../constants/Colors"
 import { useRouter } from 'expo-router'
-import { useAuth } from '@clerk/clerk-expo';
+import { auth } from '../../Configs/FirebaseConfig';
+import { signOut } from 'firebase/auth';
  
 export default function MenuList() {
     const router=useRouter();
-    const {signOut} = useAuth()
-
 
     const onMenuClick=(item)=>{
-      if(item.path=="logout"){
-        signOut()
-        return;
-      }
-      if(item.path=="share"){
-        Share.share({
-          message:"Download the App by 360 EMS"
-        })
-        return;
-      }
       router.push(item.path)
     }
 
@@ -35,20 +24,9 @@ export default function MenuList() {
             name:"My Business",
             icon:require("../../assets/images/business-and-trade.png"),
             path:"/business/my-business"
-        },
-        {
-            id:3,
-            name:"Share App",
-            icon:require("../../assets/images/share_1.png"),
-            path:"share"
-        },
-        {
-            id:4,
-            name:"Logout",
-            icon:require("../../assets/images/logout.png"),
-            path:"logout"
         }
     ]
+
   return (
     <View style={{marginTop:50}}>
       <FlatList 
@@ -56,7 +34,7 @@ export default function MenuList() {
       numColumns={2}
       renderItem={({item,index})=>(
         <TouchableOpacity
-        onPress={()=>onMenuClick(item)}
+        onPress = {() => onMenuClick(item)} 
         style={{
             display:"flex",
             flexDirection:"row",
@@ -79,12 +57,27 @@ export default function MenuList() {
         </TouchableOpacity>
       )}
       />
+
       <Text style={{
         fontFamily:"outfit",
         textAlign:"center",
         marginTop:50,
         color:Colors.GRAY
       }}>Developed By 360 EMS @2025</Text>
+
+      <TouchableOpacity style={{
+                          backgroundColor: Colors.PRIMARY,
+                          padding: 18,
+                          borderRadius: 10,
+                          width: 250,
+                          marginLeft: 65,
+                          marginTop: 100,
+                      }} onPress = {() => signOut(auth)}>
+                          <Text style={{ color: "#fff", icon:require("./../../assets/images/logout.png"), textAlign: "center", fontFamily: "outfit", fontSize: 17, fontWeight: "bold" }} >Logout</Text>
+      </TouchableOpacity>
+
     </View>
+
+    
   )
 }
